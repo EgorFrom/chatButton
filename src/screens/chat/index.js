@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, FlatList, Button, Dimensions, View } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { StyleSheet, FlatList, Button, Dimensions, View, InteractionManager } from 'react-native';
 import Row from './components/Row';
 import { getRandom } from './utils';
 import { canAddItemIntoLine, getMessage } from './utils/messages';
@@ -8,6 +8,7 @@ const { width: screenWidth } = Dimensions.get('window');
 const minMessageWidth = 60;
 
 const Chat = () => {
+  const scrollRef = useRef(null);
   const [list, setList] = useState([]);
   const [disabled, setDisabled] = useState(false);
 
@@ -35,14 +36,18 @@ const Chat = () => {
 
   const handleOnPress = ({ nativeEvent: { timestamp } }) => addMessage(timestamp);
 
+  const scrollToEnd = () => scrollRef.current.scrollToEnd();
+
   renderItem = ({ item: messages }) => <Row messages={messages} />;
 
   return (
     <View style={styles.container}>
       <FlatList
+        ref={scrollRef}
         keyExtractor={item => `rowWithItem-${item[0].id}`}
         renderItem={renderItem}
         data={list}
+        onContentSizeChange={scrollToEnd}
       />
       <View style={styles.buttonContainer}>
         <Button
