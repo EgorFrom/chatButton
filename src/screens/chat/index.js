@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, FlatList, Button, Dimensions, View, InteractionManager } from 'react-native';
+import { StyleSheet, FlatList, Button, Dimensions, View } from 'react-native';
 import Row from './components/Row';
 import { getRandom } from './utils';
 import { canAddItemIntoLine, getMessage } from './utils/messages';
@@ -38,7 +38,7 @@ const Chat = () => {
 
   const scrollToEnd = () => scrollRef.current.scrollToEnd();
 
-  renderItem = ({ item: messages }) => <Row messages={messages} />;
+  const renderItem = ({ item: messages }) => <Row messages={messages} />;
 
   return (
     <View style={styles.container}>
