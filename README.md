@@ -6,3 +6,4 @@
 + Можно использовать стандартное API ReactNative
 -Нельзя использовать сторонние библиотеки
 
+![image](https://user-images.githubusercontent.com/31363936/146997830-f62c40c8-a3f6-4d26-a102-e52ea3a9616a.png)
