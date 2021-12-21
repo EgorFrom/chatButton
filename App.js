@@ -8,34 +8,19 @@
 
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
-
-// const Section = ({children, title}): Node => {
-// npx react-native run-ios --simulator="iPhone SE (2nd generation)"
+import Chat from './src/screens/chat';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>Hello world</Text>
+    <SafeAreaView style={styles.container}>
+      <Chat />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  container: {
+    flex: 1,
   },
 });
 
