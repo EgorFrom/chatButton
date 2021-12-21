@@ -14,14 +14,14 @@ const Chat = () => {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    const flatList = list.flatMap(item => item);
-    if (flatList?.length) {
+    const lastMessage = list.length && list[list.length -1][list[list.length -1].length - 1];
+    if (lastMessage) {
       const newEventList = events
         .splice(events.length === 3 ? 1 : 0, 2)
-        .concat(flatList[flatList.length - 1].timestamp);
+        .concat(lastMessage.timestamp);
       if (needDelay(newEventList)) {
         setDisabled(true);
-        setTimeout(() => setDisabled(false), 2000)
+        setTimeout(() => setDisabled(false), 3000)
       }
       setEvents(newEventList);
     }
