@@ -4,6 +4,6 @@ const getMessageId = list => !list.length ? 0 : list[list.length - 1][list[list.
 
 export const getMessage = ({ list, timestamp, width }) => ({
   id: getMessageId(list),
-  timestamp: new Date(timestamp).toLocaleTimeString(),
+  timestamp,
   width,
 });

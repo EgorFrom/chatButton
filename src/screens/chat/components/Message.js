@@ -4,7 +4,7 @@ import { getNiceColor } from '../utils/ui';
 
 const Message = React.memo(({ id, timestamp, width }) => (
   <View key={`message-${id}`} style={{ backgroundColor: getNiceColor(), width }}>
-    <Text>{timestamp}</Text>
+    <Text>{new Date(timestamp).toLocaleTimeString()}</Text>
   </View>
 ))
 

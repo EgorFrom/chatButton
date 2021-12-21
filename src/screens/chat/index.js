@@ -9,8 +9,10 @@ const minMessageWidth = 60;
 
 const Chat = () => {
   const [list, setList] = useState([]);
+  const [disabled, setDisabled] = useState(false);
 
-  const addElement = ({ nativeEvent: { timestamp } }) => setList((list) => {
+  const addMessage = timestamp => setList((list) => {
+    checkPushAvailable(list);
     const item = getMessage({ list, timestamp, width: getRandom(minMessageWidth, screenWidth) });
 
     if (!list.length) {
@@ -21,6 +23,17 @@ const Chat = () => {
       ? list.map((row, index) => index === list.length - 1 ? [...list[list.length - 1], item] : row)
       : list.concat([[item]]);
   });
+
+  const checkPushAvailable = (list) => {
+    const flatList = list.flatMap(item => item);
+    const delay = flatList.reduce((diff, message, index) => flatList.length - index < 3 ? message.timestamp - diff : diff, 0);
+    if (delay < 1000) {
+      setDisabled(true);
+      setTimeout(() => setDisabled(false), 5000)
+    }
+  }
+
+  const handleOnPress = ({ nativeEvent: { timestamp } }) => addMessage(timestamp);
 
   renderItem = ({ item: messages }) => <Row messages={messages} />;
 
@@ -34,7 +47,8 @@ const Chat = () => {
       <View style={styles.buttonContainer}>
         <Button
           title={'add messsage'}
-          onPress={addElement}
+          onPress={handleOnPress}
+          disabled={disabled}
         />
       </View>
     </View>
